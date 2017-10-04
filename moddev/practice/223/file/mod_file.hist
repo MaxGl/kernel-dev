@@ -1,0 +1,209 @@
+28.07.2012 
+==========
+
+[olej@notebook modules-done_draft]$ lsmod | grep file
+[olej@notebook modules-done_draft]$ 
+
+---------------------------------------------------------------------------------------------
+
+[olej@notebook etc]$ pwd
+/etc
+[olej@notebook etc]$ ls *.conf
+ant.conf               host.conf       mtools.conf                   readahead.conf        updatedb.conf
+asound.conf            idmapd.conf     multipath.conf                reader.conf           urlview.conf
+autofs_ldap_auth.conf  irman.conf      named.conf                    report.conf           usb_modeswitch.conf
+dhclient-wlan0.conf    jwhois.conf     nfsmount.conf                 report-sendfile.conf  ushare.conf
+dnsmasq.conf           krb5.conf       nilfs_cleanerd.conf           resolv.conf           warnquota.conf
+dracut.conf            ksmtuned.conf   nscd.conf                     rinetd.conf           wvdial.conf
+elinks.conf            ldap.conf       nsswitch.conf                 rsyslog.conf          xinetd.conf
+etter.conf             ld.so.conf      ntp.conf                      sensors3.conf         yp.conf
+fprintd.conf           lftp.conf       pam_smb.conf                  sestatus.conf         ypserv.conf
+GeoIP.conf             libaudit.conf   pbm2ppa.conf                  slim.conf             yum.conf
+gpm-root.conf          libuser.conf    pear.conf                     slp.conf              yumex.conf
+gpm-syn.conf           logrotate.conf  pm-utils-hd-apm-restore.conf  smartd.conf           yumex.profiles.conf
+gpm-twiddler.conf      ltrace.conf     pnm2ppa.conf                  sos.conf
+grub.conf              mke2fs.conf     prelink.conf                  sysctl.conf
+gssapi_mech.conf       modprobe.conf   proftpd.conf                  Trolltech.conf
+
+---------------------------------------------------------------------------------------------
+
+<fs.h>
+
+extern struct file *filp_open(const char *, int, int);
+extern struct file * dentry_open(struct dentry *, struct vfsmount *, int,
+                                 const struct cred *);
+extern int filp_close(struct file *, fl_owner_t id);
+
+---------------------------------------------------------------------------------------------
+=============================================================================================
+
+[olej@notebook file]$ sudo insmod mod_file.ko
+insmod: error inserting 'mod_file.ko': -1 Operation not permitted
+
+
+
+[olej@notebook file]$ cat /etc/yumex.profiles.conf
+[main]
+lastprofile = yum-enabled[olej@notebook file]$ 
+
+
+
+[olej@notebook file]$ dmesg | tail -n 40
+...
+**** openning file: /etc/yumex.profiles.conf
+**** read first 32 bytes:
+[main]
+lastprofile = yum-enabled
+**** close file: /etc/yumex.profiles.conf
+...
+
+---------------------------------------------------------------------------------------------
+
+[olej@notebook file]$ make 
+make -C /lib/modules/2.6.32.9-70.fc12.i686.PAE/build M=/home/olej/2011_WORK/LINUX-books/examples.DRAFT/file modules
+make[1]: Entering directory `/usr/src/kernels/2.6.32.9-70.fc12.i686.PAE'
+  CC [M]  /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_file.o
+  CC [M]  /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_vfs.o
+  Building modules, stage 2.
+  MODPOST 2 modules
+  CC      /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_file.mod.o
+  LD [M]  /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_file.ko
+  CC      /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_vfs.mod.o
+  LD [M]  /home/olej/2011_WORK/LINUX-books/examples.DRAFT/file/mod_vfs.ko
+make[1]: Leaving directory `/usr/src/kernels/2.6.32.9-70.fc12.i686.PAE'
+[olej@notebook file]$ 
+[olej@notebook file]$ sudo insmod mod_vfs.ko
+insmod: error inserting 'mod_vfs.ko': -1 Operation not permitted
+[olej@notebook file]$ dmesg | tail -n 25
+audit(:0): major=252 name_count=0: freeing multiple contexts (1)
+audit(:0): major=340 name_count=0: freeing multiple contexts (2)
+audit(:0): major=340 name_count=0: freeing multiple contexts (3)
+**** openning file: /etc/yumex.profiles.conf
+**** file size = 32 bytes
+[main]
+lastprofile = yum-enabled
+**** close file: /etc/yumex.profiles.conf
+audit(:0): major=252 name_count=0: freeing multiple contexts (1)
+audit(:0): major=340 name_count=0: freeing multiple contexts (2)
+audit(:0): major=340 name_count=0: freeing multiple contexts (3)
+audit(:0): major=340 name_count=0: freeing multiple contexts (4)
+audit(:0): major=340 name_count=0: freeing multiple contexts (5)
+audit(:0): major=340 name_count=0: freeing multiple contexts (6)
+audit(:0): major=340 name_count=0: freeing multiple contexts (7)
+audit(:0): major=340 name_count=0: freeing multiple contexts (8)
+audit(:0): major=340 name_count=0: freeing multiple contexts (9)
+audit(:0): major=340 name_count=0: freeing multiple contexts (10)
+audit(:0): major=340 name_count=0: freeing multiple contexts (11)
+audit(:0): major=340 name_count=0: freeing multiple contexts (12)
+audit(:0): major=340 name_count=0: freeing multiple contexts (13)
+audit(:0): major=340 name_count=0: freeing multiple contexts (14)
+audit(:0): major=340 name_count=0: freeing multiple contexts (15)
+audit(:0): major=340 name_count=0: freeing multiple contexts (16)
+audit: freed 16 contexts
+
+---------------------------------------------------------------------------------------------
+
+31.12.2011
+=========
+
+[olej@notebook file]$ sudo insmod mod_file.ko file=./xxx
+insmod: error inserting 'mod_file1.ko': -1 Operation not permitted
+
+[olej@notebook file]$ dmesg | tail -n100 | grep '^\*'
+*** openning file: ./xxx
+*** read first 39 bytes:
+*1 .........
+*2 .........
+*3 .........
+*** close file
+
+
+[olej@notebook file]$ sudo insmod mod_file1.ko
+insmod: error inserting 'mod_file1.ko': -1 Operation not permitted
+
+[olej@notebook file]$ dmesg | tail -n30 | grep '^\*'
+*** openning file: /etc/yumex.profiles.conf
+*** read first 32 bytes:
+*** close file
+
+
+[olej@notebook file]$ sudo insmod mod_file1.ko file=./yyy
+insmod: error inserting 'mod_file1.ko': -1 Unknown symbol in module
+
+[olej@notebook file]$ dmesg | tail -n20 | grep '^\*'
+*** openning file: ./yyy
+*** file open failed: ./yyy
+
+---------------------------------------------------------------------------------------------
+
+[olej@notebook file]$ sudo insmod mod_vfs.ko file=./xxx
+insmod: error inserting 'mod_vfs.ko': -1 Operation not permitted
+
+[olej@notebook file]$ dmesg | tail -n30 | grep '^\*'
+*** openning file: ./xxx
+*** file size = 39 bytes
+*1 .........
+*2 .........
+*3 .........
+**** close file
+
+
+
+[olej@notebook file]$ sudo insmod mod_vfs.ko file=./yyy
+insmod: error inserting 'mod_vfs.ko': -1 Unknown symbol in module
+
+[olej@notebook file]$ dmesg | tail -n20 | grep '^\*'
+*** openning file: ./yyy
+*** file open failed: ./yyy
+
+
+
+
+[olej@notebook file]$ sudo insmod mod_vfs.ko
+insmod: error inserting 'mod_vfs.ko': -1 Operation not permitted
+
+[olej@notebook file]$ dmesg | tail -n30 | grep '^\*'
+*** openning file: /etc/yumex.profiles.conf
+*** file size = 32 bytes
+**** close file
+
+---------------------------------------------------------------------------------------------
+
+
+[olej@notebook file]$ sudo insmod mdw.ko
+insmod: error inserting 'mdw.ko': -1 Operation not permitted
+
+[olej@notebook file]$ dmesg | tail -n40 | grep !
+! file open ./module.log
+! write 16 bytes
+! ...............
+! file close
+
+[olej@notebook file]$ ls -l *.log
+-rw------- 1 root root 16 Дек 31 21:23 module.log
+
+[olej@notebook file]$ sudo cat module.log 
+...............
+
+
+=============================================================================================
+
+28.07.2012 
+==========
+
+bash-4.2$ make
+make -C /lib/modules/3.13.6-200.fc20.i686/build M=/home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file modules
+make[1]: Вход в каталог `/usr/src/kernels/3.13.6-200.fc20.i686'
+  CC [M]  /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mod_file.o
+  CC [M]  /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mdw.o
+  Building modules, stage 2.
+  MODPOST 2 modules
+  CC      /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mdw.mod.o
+  LD [M]  /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mdw.ko
+  CC      /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mod_file.mod.o
+  LD [M]  /home/Olej/2014_WORK/GlobalLogic/BOOK.Kernel.org/Kexamples.BOOK/file/mod_file.ko
+make[1]: Выход из каталога `/usr/src/kernels/3.13.6-200.fc20.i686'
+
+---------------------------------------------------------------------------------------------
+
+=============================================================================================

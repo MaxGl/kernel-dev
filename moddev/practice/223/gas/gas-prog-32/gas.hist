@@ -1,0 +1,110 @@
+28.07.2012
+==========
+
+[olej@notebook gas-prog]$ make
+gcc -Wall     gas1.c   -o gas1
+gcc -Wall     gas2_0.c   -o gas2_0
+gcc -c gas2_1.c -o gas2_1.o
+gcc -c exit.S -o exit.o
+gcc gas2_1.o exit.o -o gas2_1
+rm -f *.o
+gcc -Wall     gas2_2.c   -o gas2_2
+
+----------------------------------------------------------------------------------
+
+[olej@notebook gas-prog]$ ./gas1
+----- begin prog
+----- final prog
+
+----------------------------------------------------------------------------------
+
+[olej@notebook gas-prog]$ ./gas2_0
+----- begin prog
+
+[olej@notebook gas-prog]$ echo $?
+7
+
+----------------------------------------------------------------------------------
+
+[olej@notebook gas-prog]$ ./gas2_1
+----- begin prog
+
+[olej@notebook gas-prog]$ echo $?
+7
+
+----------------------------------------------------------------------------------
+
+[olej@notebook gas-prog]$ ./gas2_2
+----- begin prog
+
+[olej@notebook gas-prog]$ echo $?
+7
+
+==================================================================================
+
+28.07.2012
+==========
+
+bash-4.2$ make disclean
+rm -f *.o
+rm -f gas1 gas2_0 gas2_1 gas2_2
+
+bash-4.2$ 
+bash-4.2$ make
+gcc -Wall     gas1.c   -o gas1
+gcc -Wall     gas2_0.c   -o gas2_0
+gcc -c gas2_1.c -o gas2_1.o
+gcc -c exit.S -o exit.o
+gcc gas2_1.o exit.o -o gas2_1
+rm -f *.o
+gcc -Wall     gas2_2.c   -o gas2_2
+
+----------------------------------------------------------------------------------
+
+bash-4.2$ uname -a
+Linux notebook.localdomain 3.13.6-200.fc20.i686 #1 SMP Fri Mar 7 17:28:21 UTC 2014 i686 i686 i386 GNU/Linux
+
+bash-4.2$ gcc -S -o tst-32.S tst.c
+
+----------------------------------------------------------------------------------
+
+[Olej@modules gas-prog-64]$ uname -a
+Linux modules.localdomain 3.13.6-200.fc20.x86_64 #1 SMP Fri Mar 7 17:02:28 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+[Olej@modules gas-prog-64]$ gcc -S -o tst-64.S tst.c
+
+==================================================================================
+
+05.07.2014
+==========
+
+bash-4.2$ ./gas1
+----- begin prog
+----- final prog
+
+
+bash-4.2$ ./gas2_0
+----- begin prog
+
+bash-4.2$ echo $?
+7
+
+
+bash-4.2$ ./gas2_1
+----- begin prog
+
+bash-4.2$ echo $?
+7
+
+
+bash-4.2$ ./gas2_2
+----- begin prog
+
+bash-4.2$ echo $?
+7
+
+
+bash-4.2$ echo $?
+0
+
+==================================================================================
