@@ -1,0 +1,11 @@
+commit 13945009fd0f53e78d07fddd698d13e673a69643
+Author: Jagan Teki <jagan@amarulasolutions.com>
+Date:   Wed Sep 13 17:12:06 2017 +0530
+
+    engicam: imx6qdl_icore: Bump to latest Linux and uboot releases
+    
+    - Linux: 4.13
+    - Uboot: 2017.07
+    
+    Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
+    Signed-off-by: Arnout Vandecappelle (Essensium/Mind) <arnout@mind.be>
