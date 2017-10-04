@@ -1,0 +1,6 @@
+linux
+rootfs
+opensource
+*.o
+*.d
+*.ko
