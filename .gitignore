@@ -13,3 +13,8 @@ cscope.out
 .tmp_versions
 Module.symvers
 modules.order
+
+# programs created by examples
+mp
+mplib
+mpsys
