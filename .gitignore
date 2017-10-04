@@ -2,5 +2,14 @@ linux
 rootfs
 opensource
 *.o
+*.o.cmd
 *.d
 *.ko
+*.ko.cmd
+*.mod.c
+.ycm_extra_conf.py
+tags
+cscope.out
+.tmp_versions
+Module.symvers
+modules.order
