@@ -2,10 +2,9 @@
 #define VARIANT 0
 #endif
 
-static ssize_t proc_node_read( char *buffer, char **start, off_t off,
-                               int count, int *eof, void *data ) {
+static ssize_t proc_node_read( struct file *f, char *buffer, size_t count, off_t *off) {
    unsigned long len = 0;
-   LOG( "read: %d (buffer=%p, off=%ld, start=%p)", count, buffer, off, *start );
+   LOG( "read: %d (buffer=%p, off=%ld, start=%p)", count, buffer, *off, *start );
 
 #if VARIANT == 0
 

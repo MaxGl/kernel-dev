@@ -14,18 +14,22 @@ char *node_var( void ) {
    return str;
 }
 
+struct file_operations proc_fops = {
+  .read  = proc_node_read,
+  .write = proc_node_write,
+};
+
+static struct proc_dir_entry *own_proc_node;
+
 static int __init proc_init( void ) {
    int ret;
-   struct proc_dir_entry *own_proc_node =  // размещение имени устройства
-          create_proc_entry( node_var(), S_IFREG | S_IRUGO | S_IWUGO, NULL );
+   own_proc_node =  // размещение имени устройства
+          proc_create( node_var(), S_IFREG | S_IRUGO | S_IWUGO, NULL, &proc_fops );
    if( NULL == own_proc_node ) {
       ret = -ENOENT;
       ERR( "can't create /proc/%s", node_var() );
       goto err_node;
    }
-   own_proc_node->uid = own_proc_node->gid = 0;
-   own_proc_node->read_proc = proc_node_read;
-   own_proc_node->write_proc = proc_node_write;
    if( 0 == size ) size = LEN_MSG + 1;     // инициализация буфера устройства
    if( !( buf_msg = (char*)vmalloc( size ) ) ) {
       ret = -ENOMEM;
@@ -48,6 +52,6 @@ err_node:
 
 static void __exit proc_exit( void ) {
    vfree( buf_msg );
-   remove_proc_entry( node_var() , NULL );
+   proc_remove( own_proc_node );
    LOG( "/proc/%s removed", node_var() );
 }
