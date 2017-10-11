@@ -18,3 +18,8 @@ modules.order
 mp
 mplib
 mpsys
+On branch master
+moddev/practice/245/proc/proc/mcat
+moddev/practice/245/proc/variants.le.3.9/mcat
+moddev/practice/245/proc/variants.le.3.9/recho
+moddev/practice/245/proc/variants.le.3.9/rtest
