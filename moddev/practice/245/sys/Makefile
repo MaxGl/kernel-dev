@@ -1,8 +1,8 @@
 CC = gcc
 CURRENT = $(shell uname -r)
-KDIR = /lib/modules/$(CURRENT)/build
+KDIR = $(BUILD_KERNEL)
 PWD = $(shell pwd)
-DEST = /lib/modules/$(CURRENT)/misc
+DEST = $(PWD)
 
 TARGET1 = xxx
 TARGET2 = xxm

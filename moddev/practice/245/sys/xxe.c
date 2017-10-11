@@ -53,7 +53,7 @@ static ssize_t x_store( struct class *class, const char *buf, size_t count ) {
 #define CLASS_ATTR(_name, _mode, _show, _store) \
 struct class_attribute class_attr_##_name = __ATTR(_name, _mode, _show, _store) */
 //CLASS_ATTR( xxx, 0666, &x_show, &x_store);
-CLASS_ATTR( xxx, ( S_IWUSR | S_IRUGO ), &x_show, &x_store );
+CLASS_ATTR_RW( x );
 
 static struct class *x_class;
 
@@ -61,7 +61,7 @@ int __init x_init(void) {
    int res;
    x_class = class_create( THIS_MODULE, "x-class" );
    if( IS_ERR( x_class ) ) printk( "bad class create\n" );
-   res = class_create_file( x_class, &class_attr_xxx );
+   res = class_create_file( x_class, &class_attr_x );
 /* <linux/device.h>
 extern int __must_check class_create_file(struct class *class, const struct class_attribute *attr); */
    printk("'xxx' module initialized\n");
@@ -71,7 +71,7 @@ extern int __must_check class_create_file(struct class *class, const struct clas
 void x_cleanup(void) {
 /* <linux/device.h>
 extern void class_remove_file(struct class *class, const struct class_attribute *attr); */
-   class_remove_file( x_class, &class_attr_xxx );
+   class_remove_file( x_class, &class_attr_x );
    class_destroy( x_class );
    return;
 }
