@@ -1,6 +1,7 @@
 linux
 rootfs
 opensource
+beagle_linux
 *.o
 *.o.cmd
 *.d
