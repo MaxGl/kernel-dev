@@ -1,0 +1,9 @@
+commit f81e5d7fadb9be6f86b5e779bb3a39d5d11cfcf6
+Author: Robert Nelson <robertcnelson@gmail.com>
+Date:   Fri Oct 27 13:52:12 2017 -0500
+
+    4.9.59-ti-r73 bb.org_defconfig
+    
+    4.9 TI Delta: https://github.com/RobertCNelson/ti-linux-kernel/compare/a58f0d83e628695e8725f3003a0499ed442e450a...61dbf4a927ad283ef04abe96617e865253fda662
+    
+    Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
