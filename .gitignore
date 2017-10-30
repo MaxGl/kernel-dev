@@ -2,6 +2,7 @@ linux
 rootfs
 opensource
 beagle_linux
+beagle_deploy
 *.o
 *.o.cmd
 *.d
