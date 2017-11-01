@@ -1,9 +1,9 @@
-commit f81e5d7fadb9be6f86b5e779bb3a39d5d11cfcf6
-Author: Robert Nelson <robertcnelson@gmail.com>
-Date:   Fri Oct 27 13:52:12 2017 -0500
+commit 2cc97d4d3906665e3583b466f698923b1cebe220
+Author: Maksym Glubokiy <M.Glubokiy@gmail.com>
+Date:   Wed Nov 1 19:53:29 2017 +0200
 
-    4.9.59-ti-r73 bb.org_defconfig
+    Revert "am335x-bone-common: config-pin: carve out P9.19/P9.20"
     
-    4.9 TI Delta: https://github.com/RobertCNelson/ti-linux-kernel/compare/a58f0d83e628695e8725f3003a0499ed442e450a...61dbf4a927ad283ef04abe96617e865253fda662
+    Reverting in order to get back i2c2 interface
     
-    Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+    This reverts commit 00ec52fcb049467b7f3fb620e0764e77c1f39f3f.
