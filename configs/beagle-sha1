@@ -1,9 +1,5 @@
-commit 2cc97d4d3906665e3583b466f698923b1cebe220
+commit 47b15ccdf24924309a0e457bf2a9cd2d73550614
 Author: Maksym Glubokiy <M.Glubokiy@gmail.com>
-Date:   Wed Nov 1 19:53:29 2017 +0200
+Date:   Wed Nov 1 20:08:42 2017 +0200
 
-    Revert "am335x-bone-common: config-pin: carve out P9.19/P9.20"
-    
-    Reverting in order to get back i2c2 interface
-    
-    This reverts commit 00ec52fcb049467b7f3fb620e0764e77c1f39f3f.
+    mpu6050: add to dts on i2c2
