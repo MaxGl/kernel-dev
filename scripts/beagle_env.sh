@@ -16,8 +16,8 @@ unset beagle_deploy
 beagle_deploy() {
 	local boot_path="${INSTALL_BASE}/boot/"
 	local mod_path="${INSTALL_BASE}"
-	local kernel_version=$(make kernelversion)
-	local modules_dir="${mod_path}/lib/modules/${kernel_version}/"
+	local kernel_release=$(make kernelrelease)
+	local modules_dir="${mod_path}/lib/modules/${kernel_release}/"
 	local targets="$1"
 
 	rm -rf "${boot_path}" "$mod_path"
@@ -28,5 +28,6 @@ beagle_deploy() {
 	[ -z "$targets" ] && targets="zinstall dtbs_install modules_install"
 	INSTALL_PATH="${boot_path}" INSTALL_MOD_PATH="${mod_path}" make $targets
 
+	echo "rm -f ${modules_dir}/source ${modules_dir}/build"
 	rm -f "${modules_dir}/source" "${modules_dir}/build"
 }
